@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UISearchBarDelegate {
+class RepositoryListView: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchbar: UISearchBar!
     
     var repository: [[String: Any]]=[]
@@ -40,21 +40,21 @@ class ViewController: UITableViewController, UISearchBarDelegate {
             task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
                 if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
                     if let items = obj["items"] as? [[String: Any]] {
-                    self.repository = items
+                        self.repository = items
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
                     }
                 }
             }
-        task?.resume()
+            task?.resume()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail"{
-            let dtl = segue.destination as! ViewController2
-            dtl.vc1 = self
+            let detail = segue.destination as! RepositoryDetailView
+            detail.RepositoryList = self
         }
     }
     
@@ -62,11 +62,12 @@ class ViewController: UITableViewController, UISearchBarDelegate {
         return repository.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell = UITableViewCell()
-        let rp = repository[indexPath.row]
-        cell.textLabel?.text = rp["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = rp["language"] as? String ?? ""
+        let searchRepository = repository[indexPath.row]
+        cell.textLabel?.text = searchRepository["full_name"] as? String ?? ""
+        cell.detailTextLabel?.text = searchRepository["language"] as? String ?? ""
         cell.tag = indexPath.row
         return cell
     }
