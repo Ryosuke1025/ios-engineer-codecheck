@@ -7,7 +7,7 @@
 ・Extensionでリファクタリング<br>
 - [x] インデント<br>
 - [x] スペースや改行<br>
-・[swiftlint](https://github.com/realm/SwiftLint)で静的解析を行ない、修正<br>
+・[SwiftLint](https://github.com/realm/SwiftLint)で静的解析を行ない、修正<br>
 - [x] コメントの適切性<br>
 ・不要なコメントを消して、プロパティやメソッドの塊にコメントした<br>
 
