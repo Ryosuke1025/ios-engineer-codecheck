@@ -9,14 +9,18 @@
 import UIKit
 
 class RepositoryListView: UITableViewController, UISearchBarDelegate {
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var searchbar: UISearchBar!
-
     var repository: [[String: Any]] = []
     var task: URLSessionTask?
     var word: String!
     var url: String!
     var index: Int!
 
+    // MARK: - Method
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchbar.text = "GitHubのリポジトリを検索できるよー"
@@ -32,6 +36,9 @@ class RepositoryListView: UITableViewController, UISearchBarDelegate {
 }
 
 extension RepositoryListView {
+    
+    // MARK: - Method
+    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.text = ""
         return true
@@ -63,6 +70,9 @@ extension RepositoryListView {
 }
 
 extension RepositoryListView {
+    
+    // MARK: - Method
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         repository.count
     }

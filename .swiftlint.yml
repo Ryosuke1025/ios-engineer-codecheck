@@ -63,7 +63,7 @@ disabled_rules:
   #- trailing_comma
   #- trailing_newline
   #- trailing_semicolon
-  #- trailing_whitespace
+  - trailing_whitespace
   #- type_body_length
   #- type_name
   #- unneeded_break_in_switch
@@ -131,7 +131,7 @@ opt_in_rules:
   #- multiline_parameters_brackets # 括弧で行を増やしたくないため
   - nimble_operator
   #- no_extension_access_modifier # エクステンションにACLを設定したいことがあるため
-  #- no_grouping_extension 
+  #- no_grouping_extension
   - nslocalizedstring_key
   #- number_separator # 数字を `_` で区切りたくないため
   #- object_literal # リテラルで生成したくないこともあるため

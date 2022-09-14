@@ -9,6 +9,9 @@
 import UIKit
 
 class RepositoryDetailView: UIViewController {
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var repositoryName: UILabel!
     @IBOutlet weak var language: UILabel!
@@ -16,9 +19,10 @@ class RepositoryDetailView: UIViewController {
     @IBOutlet weak var wachers: UILabel!
     @IBOutlet weak var forks: UILabel!
     @IBOutlet weak var issues: UILabel!
-
     var repositoryList: RepositoryListView!
 
+    // MARK: - Method
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
