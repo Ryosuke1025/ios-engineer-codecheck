@@ -23,6 +23,15 @@ class RepositoryListView: UITableViewController, UISearchBarDelegate {
         searchbar.delegate = self
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Detail"{
+            let detail = segue.destination as! RepositoryDetailView
+            detail.repositoryList = self
+        }
+    }
+}
+
+extension RepositoryListView {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.text = ""
         return true
@@ -34,7 +43,6 @@ class RepositoryListView: UITableViewController, UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         word = searchBar.text!
-
         if word.isEmpty {
             print("ワードが入力されてない")
         } else {
@@ -52,14 +60,9 @@ class RepositoryListView: UITableViewController, UISearchBarDelegate {
             task?.resume()
         }
     }
+}
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail"{
-            let detail = segue.destination as! RepositoryDetailView
-            detail.repositoryList = self
-        }
-    }
-
+extension RepositoryListView {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         repository.count
     }
