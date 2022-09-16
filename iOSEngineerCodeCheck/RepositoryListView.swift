@@ -15,8 +15,6 @@ class RepositoryListView: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchbar: UISearchBar!
     var repository: [[String: Any]] = []
     var task: URLSessionTask?
-    var word: String!
-    var url: String!
     var index: Int!
 
     // MARK: - Method
@@ -43,29 +41,28 @@ extension RepositoryListView {
         searchBar.text = ""
         return true
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         task?.cancel()
     }
-
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        word = searchBar.text!
-        if word.isEmpty {
-            print("ワードが入力されてない")
-        } else {
-            url = "https://api.github.com/search/repositories?q=\(word!)"
-            task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
-                if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = obj["items"] as? [[String: Any]] {
-                        self.repository = items
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
+        
+        // Optional Bindingでアンラップ
+        guard let word = searchBar.text else { return }
+        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)") else { return }
+        task = URLSession.shared.dataTask(with: url) { data, _, _ in
+            guard let data = data else { return }
+            if let obj = try! JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                if let items = obj["items"] as? [[String: Any]] {
+                    self.repository = items
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
                 }
             }
-            task?.resume()
         }
+        task?.resume()
     }
 }
 

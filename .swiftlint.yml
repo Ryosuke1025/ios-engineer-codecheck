@@ -89,7 +89,7 @@ opt_in_rules:
   - closure_end_indentation
   - closure_spacing
   - collection_alignment
-  - conditional_returns_on_newline
+  #- conditional_returns_on_newline # guard let文を使う際に一行にしため
   - contains_over_first_not_nil
   - convenience_type
   #- discouraged_object_literal # オブジェクトリテラルを使いたいため
@@ -110,7 +110,7 @@ opt_in_rules:
   #- file_header # このルールの意味を理解していないため
   - file_name
   - first_where
-  #- force_unwrapping
+  - force_unwrapping
   - function_default_parameter_at_end
   - identical_operands
   - implicit_return
