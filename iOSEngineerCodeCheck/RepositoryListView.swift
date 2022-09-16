@@ -27,8 +27,8 @@ class RepositoryListView: UITableViewController, UISearchBarDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail"{
-            let detail = segue.destination as! RepositoryDetailView
-            detail.repositoryList = self
+            let detail = segue.destination as? RepositoryDetailView
+            detail?.repositoryList = self
         }
     }
 }
