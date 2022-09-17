@@ -25,8 +25,9 @@ class RepositoryDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let repositoryList = repositoryList else { return }
-        let repository = repositoryList.repository[repositoryList.index]
+        
+        guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
+        let repository = repositoryList.repository[index]
         language.text = "Written in \(repository["language"] as? String ?? "")"
         stargazers.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
         wachers.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
@@ -36,14 +37,16 @@ class RepositoryDetailView: UIViewController {
     }
 
     func getImage() {
-        guard let repositoryList = repositoryList else { return }
-        let repository = repositoryList.repository[repositoryList.index]
+        guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
+        let repository = repositoryList.repository[index]
         
         repositoryName.text = repository["full_name"] as? String
         
-        guard let owner = repository["owner"] as? [String: Any] else { return }
-        guard let avatarURLstring = owner["avatar_url"] as? String else { return }
-        guard let avatarURL = URL(string: avatarURLstring) else { return }
+        guard
+            let owner = repository["owner"] as? [String: Any],
+            let avatarURLstring = owner["avatar_url"] as? String,
+            let avatarURL = URL(string: avatarURLstring)
+        else { return }
         URLSession.shared.dataTask(with: avatarURL) { data, response, error in
             
             // Failed access
@@ -55,8 +58,7 @@ class RepositoryDetailView: UIViewController {
             if let response = response as? HTTPURLResponse {
                 print(response.statusCode)
             }
-            guard let data = data else { return }
-            guard let img = UIImage(data: data) else { return }
+            guard let data = data, let img = UIImage(data: data) else { return }
             DispatchQueue.main.async {
                 self.imageView.image = img
             }

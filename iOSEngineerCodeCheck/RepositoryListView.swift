@@ -15,7 +15,7 @@ class RepositoryListView: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchbar: UISearchBar?
     var repository: [[String: Any]] = []
     var task: URLSessionTask?
-    var index: Int!
+    var index: Int?
 
     // MARK: - Method
     
