@@ -44,7 +44,7 @@ class RepositoryDetailView: UIViewController {
         guard let owner = repository["owner"] as? [String: Any] else { return }
         guard let avatarURLstring = owner["avatar_url"] as? String else { return }
         guard let avatarURL = URL(string: avatarURLstring) else { return }
-        URLSession.shared.dataTask(with: avatarURL) { data, urlResponse, error in
+        URLSession.shared.dataTask(with: avatarURL) { data, response, error in
             
             // Failed access
             if let error = error {
@@ -52,8 +52,8 @@ class RepositoryDetailView: UIViewController {
                 return
             }
             // Successful access
-            if let urlResponse = urlResponse as? HTTPURLResponse {
-                print(urlResponse.statusCode)
+            if let response = response as? HTTPURLResponse {
+                print(response.statusCode)
             }
             
             guard let data = data else { return }

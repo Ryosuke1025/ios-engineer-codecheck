@@ -36,9 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A6DE59A228D4D86B009042A2 /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6DE59A328D4D86B009042A2 /* iOSEngineerCodeCheckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSEngineerCodeCheckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6DE59A428D4D86B009042A2 /* iOSEngineerCodeCheckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSEngineerCodeCheckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6DE59A228D4D86B009042A2 /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = iOSEngineerCodeCheck.app; path = "/Users/suzakiryousuke/Documents/ios-engineer-codecheck/build/Debug-iphoneos/iOSEngineerCodeCheck.app"; sourceTree = "<absolute>"; };
+		A6DE59A528D5A4E9009042A2 /* iOSEngineerCodeCheckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = iOSEngineerCodeCheckTests.xctest; path = "/Users/suzakiryousuke/Documents/ios-engineer-codecheck/build/Debug-iphoneos/iOSEngineerCodeCheckTests.xctest"; sourceTree = "<absolute>"; };
+		A6DE59A628D5A4E9009042A2 /* iOSEngineerCodeCheckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = iOSEngineerCodeCheckUITests.xctest; path = "/Users/suzakiryousuke/Documents/ios-engineer-codecheck/build/Debug-iphoneos/iOSEngineerCodeCheckUITests.xctest"; sourceTree = "<absolute>"; };
 		BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailView.swift; sourceTree = "<group>"; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFD945E0244DC5E80012785A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,9 +84,6 @@
 				BFD945DD244DC5E80012785A /* iOSEngineerCodeCheck */,
 				BFD945F4244DC5EB0012785A /* iOSEngineerCodeCheckTests */,
 				BFD945FF244DC5EB0012785A /* iOSEngineerCodeCheckUITests */,
-				A6DE59A228D4D86B009042A2 /* iOSEngineerCodeCheck.app */,
-				A6DE59A328D4D86B009042A2 /* iOSEngineerCodeCheckTests.xctest */,
-				A6DE59A428D4D86B009042A2 /* iOSEngineerCodeCheckUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,7 +157,7 @@
 			);
 			name = iOSEngineerCodeCheckTests;
 			productName = iOSEngineerCodeCheckTests;
-			productReference = A6DE59A328D4D86B009042A2 /* iOSEngineerCodeCheckTests.xctest */;
+			productReference = A6DE59A528D5A4E9009042A2 /* iOSEngineerCodeCheckTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		BFD945FB244DC5EB0012785A /* iOSEngineerCodeCheckUITests */ = {
@@ -180,7 +177,7 @@
 			);
 			name = iOSEngineerCodeCheckUITests;
 			productName = iOSEngineerCodeCheckUITests;
-			productReference = A6DE59A428D4D86B009042A2 /* iOSEngineerCodeCheckUITests.xctest */;
+			productReference = A6DE59A628D5A4E9009042A2 /* iOSEngineerCodeCheckUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */

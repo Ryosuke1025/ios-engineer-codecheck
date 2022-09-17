@@ -49,9 +49,9 @@ extension RepositoryListView {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         // Optional Bindingでアンラップ
-        guard let word = searchBar.text else { return }
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)") else { return }
-        task = URLSession.shared.dataTask(with: url) { data, urlResponse, error in
+        guard let searchWord = searchBar.text else { return }
+        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
+        task = URLSession.shared.dataTask(with: url) { data, response, error in
             
             // Failed access
             if let error = error {
@@ -59,13 +59,13 @@ extension RepositoryListView {
                 return
             }
             // Successful access
-            if let urlResponse = urlResponse as? HTTPURLResponse {
-                print(urlResponse.statusCode)
+            if let response = response as? HTTPURLResponse {
+                print(response.statusCode)
             }
             
             guard let data = data else { return }
-            guard let obj = try! JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
-            guard let items = obj["items"] as? [[String: Any]] else { return }
+            guard let json = try! JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
+            guard let items = json["items"] as? [[String: Any]] else { return }
             self.repository = items
             DispatchQueue.main.async {
                 self.tableView.reloadData()
