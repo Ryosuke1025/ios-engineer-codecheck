@@ -51,15 +51,16 @@ extension RepositoryListView {
         // Optional Bindingでアンラップ
         guard let word = searchBar.text else { return }
         guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)") else { return }
-        task = URLSession.shared.dataTask(with: url) { data, _, _ in
+        task = URLSession.shared.dataTask(with: url) { data, urlResponse, _ in
+            guard let urlResponse = urlResponse as? HTTPURLResponse else { return }
+            print(urlResponse.statusCode)
+            
             guard let data = data else { return }
-            if let obj = try! JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                if let items = obj["items"] as? [[String: Any]] {
-                    self.repository = items
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
+            guard let obj = try! JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
+            guard let items = obj["items"] as? [[String: Any]] else { return }
+            self.repository = items
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
         task?.resume()
