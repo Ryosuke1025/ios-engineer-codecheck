@@ -51,9 +51,17 @@ extension RepositoryListView {
         // Optional Bindingでアンラップ
         guard let word = searchBar.text else { return }
         guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)") else { return }
-        task = URLSession.shared.dataTask(with: url) { data, urlResponse, _ in
-            guard let urlResponse = urlResponse as? HTTPURLResponse else { return }
-            print(urlResponse.statusCode)
+        task = URLSession.shared.dataTask(with: url) { data, urlResponse, error in
+            
+            // Failed access
+            if let error = error {
+                print("APIアクセス時にエラーが発生しました。: error={\(error)}")
+                return
+            }
+            // Successful access
+            if let urlResponse = urlResponse as? HTTPURLResponse {
+                print(urlResponse.statusCode)
+            }
             
             guard let data = data else { return }
             guard let obj = try! JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }

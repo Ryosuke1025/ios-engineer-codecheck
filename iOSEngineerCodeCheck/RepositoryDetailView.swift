@@ -44,7 +44,18 @@ class RepositoryDetailView: UIViewController {
         guard let owner = repository["owner"] as? [String: Any] else { return }
         guard let avatarURLstring = owner["avatar_url"] as? String else { return }
         guard let avatarURL = URL(string: avatarURLstring) else { return }
-        URLSession.shared.dataTask(with: avatarURL) { data, _, _ in
+        URLSession.shared.dataTask(with: avatarURL) { data, urlResponse, error in
+            
+            // Failed access
+            if let error = error {
+                print("APIアクセス時にエラーが発生しました。: error={\(error)}")
+                return
+            }
+            // Successful access
+            if let urlResponse = urlResponse as? HTTPURLResponse {
+                print(urlResponse.statusCode)
+            }
+            
             guard let data = data else { return }
             guard let img = UIImage(data: data) else { return }
             DispatchQueue.main.async {
