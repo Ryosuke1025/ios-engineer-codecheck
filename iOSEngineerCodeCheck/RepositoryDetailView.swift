@@ -12,13 +12,13 @@ class RepositoryDetailView: UIViewController {
     
     // MARK: - Properties
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var repositoryName: UILabel!
-    @IBOutlet weak var language: UILabel!
-    @IBOutlet weak var stargazers: UILabel!
-    @IBOutlet weak var wachers: UILabel!
-    @IBOutlet weak var forks: UILabel!
-    @IBOutlet weak var issues: UILabel!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var repositoryName: UILabel!
+    @IBOutlet private weak var language: UILabel!
+    @IBOutlet private weak var stargazers: UILabel!
+    @IBOutlet private weak var wachers: UILabel!
+    @IBOutlet private weak var forks: UILabel!
+    @IBOutlet private weak var issues: UILabel!
     var repositoryList: RepositoryListView?
 
     // MARK: - Method
