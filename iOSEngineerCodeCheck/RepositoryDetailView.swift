@@ -19,15 +19,14 @@ class RepositoryDetailView: UIViewController {
     @IBOutlet weak var wachers: UILabel!
     @IBOutlet weak var forks: UILabel!
     @IBOutlet weak var issues: UILabel!
-    var repositoryList: RepositoryListView!
+    var repositoryList: RepositoryListView?
 
     // MARK: - Method
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        guard let repositoryList = repositoryList else { return }
         let repository = repositoryList.repository[repositoryList.index]
-
         language.text = "Written in \(repository["language"] as? String ?? "")"
         stargazers.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
         wachers.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
@@ -37,6 +36,7 @@ class RepositoryDetailView: UIViewController {
     }
 
     func getImage() {
+        guard let repositoryList = repositoryList else { return }
         let repository = repositoryList.repository[repositoryList.index]
         
         repositoryName.text = repository["full_name"] as? String
@@ -55,7 +55,6 @@ class RepositoryDetailView: UIViewController {
             if let response = response as? HTTPURLResponse {
                 print(response.statusCode)
             }
-            
             guard let data = data else { return }
             guard let img = UIImage(data: data) else { return }
             DispatchQueue.main.async {

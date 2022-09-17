@@ -12,7 +12,7 @@ class RepositoryListView: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Properties
     
-    @IBOutlet weak var searchbar: UISearchBar!
+    @IBOutlet weak var searchbar: UISearchBar?
     var repository: [[String: Any]] = []
     var task: URLSessionTask?
     var index: Int!
@@ -21,6 +21,7 @@ class RepositoryListView: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let searchbar = searchbar else { return }
         searchbar.text = "GitHubのリポジトリを検索できるよー"
         searchbar.delegate = self
     }
@@ -48,7 +49,6 @@ extension RepositoryListView {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        // Optional Bindingでアンラップ
         guard let searchWord = searchBar.text else { return }
         guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
         task = URLSession.shared.dataTask(with: url) { data, response, error in
