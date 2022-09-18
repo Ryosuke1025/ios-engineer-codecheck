@@ -179,7 +179,8 @@ included:
 
 # 対象外のファイル・フォルダ
 excluded:
-  #- Pods
+  - Pods
+  - iOSEngineerCodeCheck/R.generated.swift
   #- Carthage
 
 line_length:
