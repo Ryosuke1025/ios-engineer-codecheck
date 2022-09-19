@@ -34,7 +34,7 @@ final class RepositoryDetailView: UIViewController {
         let repository = repositoryList.repository[index]
         language.text = "Written in \(repository["language"] as? String ?? "")"
         stargazers.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
-        wachers.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
+        wachers.text = "\(repository["watchers_count"] as? Int ?? 0) watchers"
         forks.text = "\(repository["forks_count"] as? Int ?? 0) forks"
         issues.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
     }
