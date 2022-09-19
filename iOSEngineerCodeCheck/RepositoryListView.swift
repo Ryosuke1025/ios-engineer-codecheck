@@ -8,29 +8,28 @@
 
 import UIKit
 
-class RepositoryListView: UITableViewController, UISearchBarDelegate {
+final class RepositoryListView: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Properties
     
-    @IBOutlet weak var searchbar: UISearchBar!
+    @IBOutlet private weak var searchbar: UISearchBar?
+    private var task: URLSessionTask?
     var repository: [[String: Any]] = []
-    var task: URLSessionTask?
-    var word: String!
-    var url: String!
-    var index: Int!
+    var index: Int?
 
     // MARK: - Method
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let searchbar = searchbar else { return }
         searchbar.text = "GitHubのリポジトリを検索できるよー"
         searchbar.delegate = self
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail"{
-            let detail = segue.destination as! RepositoryDetailView
-            detail.repositoryList = self
+            let detail = segue.destination as? RepositoryDetailView
+            detail?.repositoryList = self
         }
     }
 }
@@ -43,29 +42,36 @@ extension RepositoryListView {
         searchBar.text = ""
         return true
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         task?.cancel()
     }
-
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        word = searchBar.text!
-        if word.isEmpty {
-            print("ワードが入力されてない")
-        } else {
-            url = "https://api.github.com/search/repositories?q=\(word!)"
-            task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
-                if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = obj["items"] as? [[String: Any]] {
-                        self.repository = items
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    }
-                }
+        
+        guard let searchWord = searchBar.text else { return }
+        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
+        task = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            // Failed access
+            if let error = error {
+                print("APIアクセス時にエラーが発生しました。: error={\(error)}")
+                return
             }
-            task?.resume()
+            // Successful access
+            if let response = response as? HTTPURLResponse {
+                print(response.statusCode)
+            }
+            
+            guard let data = data else { return }
+            guard let json = try! JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
+            guard let items = json["items"] as? [[String: Any]] else { return }
+            self.repository = items
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
+        task?.resume()
     }
 }
 
