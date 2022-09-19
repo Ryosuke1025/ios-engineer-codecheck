@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RepositoryDetailView: UIViewController {
+final class RepositoryDetailView: UIViewController {
     
     // MARK: - Properties
     
@@ -36,7 +36,7 @@ class RepositoryDetailView: UIViewController {
         getImage()
     }
 
-    func getImage() {
+    private func getImage() {
         guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
         let repository = repositoryList.repository[index]
         

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class RepositoryListView: UITableViewController, UISearchBarDelegate {
+final class RepositoryListView: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Properties
     
     @IBOutlet private weak var searchbar: UISearchBar?
+    private var task: URLSessionTask?
     var repository: [[String: Any]] = []
-    var task: URLSessionTask?
     var index: Int?
 
     // MARK: - Method
