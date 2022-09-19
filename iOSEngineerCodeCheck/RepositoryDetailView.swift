@@ -25,7 +25,11 @@ final class RepositoryDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setpuData()
+        getImage()
+    }
+    
+    private func setpuData() {
         guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
         let repository = repositoryList.repository[index]
         language.text = "Written in \(repository["language"] as? String ?? "")"
@@ -33,9 +37,8 @@ final class RepositoryDetailView: UIViewController {
         wachers.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
         forks.text = "\(repository["forks_count"] as? Int ?? 0) forks"
         issues.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
-        getImage()
     }
-
+    
     private func getImage() {
         guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
         let repository = repositoryList.repository[index]
