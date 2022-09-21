@@ -21,7 +21,10 @@ final class RepositoryDetailView: UIViewController {
     @IBOutlet private weak var issues: UILabel!
     var repositoryList: RepositoryListView?
 
-    // MARK: - Method
+    // MARK: - Life Cycle
+    deinit {
+        print("RepositoryDetailView deinit")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
