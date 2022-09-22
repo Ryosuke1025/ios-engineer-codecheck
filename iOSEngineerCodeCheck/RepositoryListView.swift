@@ -17,7 +17,10 @@ final class RepositoryListView: UITableViewController, UISearchBarDelegate {
     var repository: [[String: Any]] = []
     var index: Int?
 
-    // MARK: - Method
+    // MARK: - Life Cycle
+    deinit {
+        print("RepositoryListView deinit")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,9 @@ extension RepositoryListView {
         
         guard let searchWord = searchBar.text else { return }
         guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
-        task = URLSession.shared.dataTask(with: url) { data, response, error in
+        
+        // selfをweak selfに変更
+        task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             
             // Failed access
             if let error = error {
@@ -62,7 +67,7 @@ extension RepositoryListView {
             if let response = response as? HTTPURLResponse {
                 print(response.statusCode)
             }
-            
+            guard let self = self else { return }
             guard let data = data else { return }
             guard let json = try! JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
             guard let items = json["items"] as? [[String: Any]] else { return }

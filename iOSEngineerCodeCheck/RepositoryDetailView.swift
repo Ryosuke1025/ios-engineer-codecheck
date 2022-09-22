@@ -21,7 +21,10 @@ final class RepositoryDetailView: UIViewController {
     @IBOutlet private weak var issues: UILabel!
     var repositoryList: RepositoryListView?
 
-    // MARK: - Method
+    // MARK: - Life Cycle
+    deinit {
+        print("RepositoryDetailView deinit")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +37,7 @@ final class RepositoryDetailView: UIViewController {
         let repository = repositoryList.repository[index]
         language.text = "Written in \(repository["language"] as? String ?? "")"
         stargazers.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
-        wachers.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
+        wachers.text = "\(repository["watchers_count"] as? Int ?? 0) watchers"
         forks.text = "\(repository["forks_count"] as? Int ?? 0) forks"
         issues.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
     }
@@ -50,8 +53,8 @@ final class RepositoryDetailView: UIViewController {
             let avatarURLstring = owner["avatar_url"] as? String,
             let avatarURL = URL(string: avatarURLstring)
         else { return }
-        URLSession.shared.dataTask(with: avatarURL) { data, response, error in
-            
+        
+        URLSession.shared.dataTask(with: avatarURL) { [weak self] (data, response, error) in
             // Failed access
             if let error = error {
                 print("APIアクセス時にエラーが発生しました。: error={\(error)}")
@@ -61,6 +64,7 @@ final class RepositoryDetailView: UIViewController {
             if let response = response as? HTTPURLResponse {
                 print(response.statusCode)
             }
+            guard let self = self else { return }
             guard let data = data, let img = UIImage(data: data) else { return }
             DispatchQueue.main.async {
                 self.imageView.image = img
