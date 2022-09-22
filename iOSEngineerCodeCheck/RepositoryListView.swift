@@ -18,7 +18,6 @@ final class RepositoryListView: UITableViewController, UISearchBarDelegate {
     var index: Int?
 
     // MARK: - Life Cycle
-    
     deinit {
         print("RepositoryListView deinit")
     }
@@ -68,13 +67,13 @@ extension RepositoryListView {
             if let response = response as? HTTPURLResponse {
                 print(response.statusCode)
             }
-            
+            guard let self = self else { return }
             guard let data = data else { return }
             guard let json = try! JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
             guard let items = json["items"] as? [[String: Any]] else { return }
-            self?.repository = items
+            self.repository = items
             DispatchQueue.main.async {
-                self?.tableView.reloadData()
+                self.tableView.reloadData()
             }
         }
         task?.resume()

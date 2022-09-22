@@ -53,8 +53,8 @@ final class RepositoryDetailView: UIViewController {
             let avatarURLstring = owner["avatar_url"] as? String,
             let avatarURL = URL(string: avatarURLstring)
         else { return }
-        URLSession.shared.dataTask(with: avatarURL) { data, response, error in
-            
+        
+        URLSession.shared.dataTask(with: avatarURL) { [weak self] (data, response, error) in
             // Failed access
             if let error = error {
                 print("APIアクセス時にエラーが発生しました。: error={\(error)}")
@@ -64,6 +64,7 @@ final class RepositoryDetailView: UIViewController {
             if let response = response as? HTTPURLResponse {
                 print(response.statusCode)
             }
+            guard let self = self else { return }
             guard let data = data, let img = UIImage(data: data) else { return }
             DispatchQueue.main.async {
                 self.imageView.image = img
