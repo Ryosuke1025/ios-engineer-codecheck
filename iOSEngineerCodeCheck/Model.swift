@@ -1,14 +1,6 @@
-//  Model.swift
-//  iOSEngineerCodeCheck
-//
-//  Created by 須崎良祐 on 2022/09/23.
-//  Copyright © 2022 YUMEMI Inc. All rights reserved.
-//
-
 import Foundation
 
-struct SearchRepositories: Codable {
-    
+struct Repositories: Codable {
     let items: [Repository]
     
     private enum CodingKeys: String, CodingKey {
@@ -17,7 +9,6 @@ struct SearchRepositories: Codable {
 }
 
 struct Repository: Codable {
-    
     let id: Int
     let fullName: String
     let language: String
@@ -25,7 +16,6 @@ struct Repository: Codable {
     let watchersCount: Int
     let forksCount: Int
     let openIssuesCount: Int
-    
     let owner: Owner
     
     private enum CodingKeys: String, CodingKey {

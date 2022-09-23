@@ -35,25 +35,22 @@ final class RepositoryDetailView: UIViewController {
     private func setpuData() {
         guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
         let repository = repositoryList.repository[index]
-        language.text = "Written in \(repository["language"] as? String ?? "")"
-        stargazers.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
-        wachers.text = "\(repository["watchers_count"] as? Int ?? 0) watchers"
-        forks.text = "\(repository["forks_count"] as? Int ?? 0) forks"
-        issues.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
+        language.text = "Written in \(repository.language)"
+        stargazers.text = "\(repository.stargazersCount) stars"
+        wachers.text = "\(repository.watchersCount) watchers"
+        forks.text = "\(repository.forksCount) forks"
+        issues.text = "\(repository.openIssuesCount) open issues"
     }
     
     private func getImage() {
         guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
         let repository = repositoryList.repository[index]
         
-        repositoryName.text = repository["full_name"] as? String
+        repositoryName.text = repository.fullName
         
-        guard
-            let owner = repository["owner"] as? [String: Any],
-            let avatarURLstring = owner["avatar_url"] as? String,
-            let avatarURL = URL(string: avatarURLstring)
-        else { return }
-        
+        let owner = repository.owner
+        let avatarURLstring = owner.avatarUrl
+        guard let avatarURL = URL(string: avatarURLstring) else { return }
         URLSession.shared.dataTask(with: avatarURL) { [weak self] (data, response, error) in
             // Failed access
             if let error = error {

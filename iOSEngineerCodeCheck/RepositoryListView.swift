@@ -14,7 +14,7 @@ final class RepositoryListView: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet private weak var searchbar: UISearchBar?
     private var task: URLSessionTask?
-    var repository: [[String: Any]] = []
+    var repository: [Repository] = []
     var index: Int?
 
     // MARK: - Life Cycle
@@ -69,9 +69,8 @@ extension RepositoryListView {
             }
             guard let self = self else { return }
             guard let data = data else { return }
-            guard let json = try! JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
-            guard let items = json["items"] as? [[String: Any]] else { return }
-            self.repository = items
+            guard let items = try? JSONDecoder().decode(Repositories.self, from: data) else { return }
+            self.repository = items.items
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -91,8 +90,8 @@ extension RepositoryListView {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let searchRepository = repository[indexPath.row]
-        cell.textLabel?.text = searchRepository["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = searchRepository["language"] as? String ?? ""
+        cell.textLabel?.text = searchRepository.fullName
+        cell.detailTextLabel?.text = searchRepository.language
         cell.tag = indexPath.row
         return cell
     }
