@@ -11,6 +11,7 @@
 		9F655C1D4A837F3C7109D091 /* Pods_iOSEngineerCodeCheckTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67F4AC2D763A9DF9549A33A0 /* Pods_iOSEngineerCodeCheckTests.framework */; };
 		A6189B5928D7926400A9F173 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6189B5828D7926400A9F173 /* R.generated.swift */; };
 		A69FFA6928DDF61100231F39 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FFA6828DDF61100231F39 /* Model.swift */; };
+		A69FFA6B28DF1CE100231F39 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FFA6A28DF1CE100231F39 /* APIClient.swift */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -52,6 +53,7 @@
 		996F9BF28D21922AF81448A6 /* Pods-iOSEngineerCodeCheck.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheck.debug.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheck/Pods-iOSEngineerCodeCheck.debug.xcconfig"; sourceTree = "<group>"; };
 		A6189B5828D7926400A9F173 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		A69FFA6828DDF61100231F39 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		A69FFA6A28DF1CE100231F39 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		A6D6644E28D63350006728A9 /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6D6644F28D63350006728A9 /* iOSEngineerCodeCheckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSEngineerCodeCheckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6D6645028D63350006728A9 /* iOSEngineerCodeCheckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSEngineerCodeCheckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +133,7 @@
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
 				BFD945E2244DC5E80012785A /* RepositoryListView.swift */,
+				A69FFA6A28DF1CE100231F39 /* APIClient.swift */,
 				BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */,
 				A69FFA6828DDF61100231F39 /* Model.swift */,
 				BFD945E4244DC5E80012785A /* Main.storyboard */,
@@ -449,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD945E3244DC5E80012785A /* RepositoryListView.swift in Sources */,
+				A69FFA6B28DF1CE100231F39 /* APIClient.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* RepositoryDetailView.swift in Sources */,
 				A6189B5928D7926400A9F173 /* R.generated.swift in Sources */,
 				A69FFA6928DDF61100231F39 /* Model.swift in Sources */,

@@ -21,7 +21,6 @@ final class RepositoryDetailView: UIViewController {
     @IBOutlet private weak var issues: UILabel!
     var repositoryList: RepositoryListView?
 
-    // MARK: - Life Cycle
     deinit {
         print("RepositoryDetailView deinit")
     }
@@ -34,7 +33,7 @@ final class RepositoryDetailView: UIViewController {
     
     private func setpuData() {
         guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
-        let repository = repositoryList.repository[index]
+        let repository = repositoryList.repositories[index]
         language.text = "Written in \(repository.language)"
         stargazers.text = "\(repository.stargazersCount) stars"
         wachers.text = "\(repository.watchersCount) watchers"
@@ -44,7 +43,7 @@ final class RepositoryDetailView: UIViewController {
     
     private func getImage() {
         guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
-        let repository = repositoryList.repository[index]
+        let repository = repositoryList.repositories[index]
         
         repositoryName.text = repository.fullName
         

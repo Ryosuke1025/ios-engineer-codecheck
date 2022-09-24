@@ -13,20 +13,12 @@ final class RepositoryListView: UITableViewController, UISearchBarDelegate {
     // MARK: - Properties
     
     @IBOutlet private weak var searchbar: UISearchBar?
-    private var task: URLSessionTask?
-    var repository: [Repository] = []
+    var repositories: [Repository] = []
     var index: Int?
 
-    // MARK: - Life Cycle
-    deinit {
-        print("RepositoryListView deinit")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let searchbar = searchbar else { return }
-        searchbar.text = "GitHubのリポジトリを検索できるよー"
-        searchbar.delegate = self
+        initSetupData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -35,61 +27,88 @@ final class RepositoryListView: UITableViewController, UISearchBarDelegate {
             detail?.repositoryList = self
         }
     }
+    
+    func initSetupData() {
+        guard let searchbar = searchbar else { return }
+        searchbar.text = "GitHubのリポジトリを検索できるよー"
+        searchbar.delegate = self
+    }
+    
+    private func showAlert(title: String, message: String = "") -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        alert.addAction(defaultAction)
+        return alert
+    }
+    
+    private func wrongError() -> UIAlertController {
+        showAlert(title: "不正なワードの入力", message: "検索ワードの確認を行ってください")
+    }
+    
+    private func networkError() -> UIAlertController {
+        showAlert(title: "インターネットの非接続", message: "接続状況の確認を行ってください")
+    }
+    
+    private func parseError() -> UIAlertController {
+        showAlert(title: "データの解析に失敗しました")
+    }
 }
 
+// MARK: - Search Bar
 extension RepositoryListView {
-    
-    // MARK: - Method
-    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.text = ""
         return true
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        task?.cancel()
+        APIClient().taskCancel()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard !(searchBar.text?.isEmpty ?? true) else { return }
+        searchBar.resignFirstResponder()
         
         guard let searchWord = searchBar.text else { return }
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
-        
-        // selfをweak selfに変更
-        task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            
-            // Failed access
-            if let error = error {
-                print("APIアクセス時にエラーが発生しました。: error={\(error)}")
-                return
-            }
-            // Successful access
-            if let response = response as? HTTPURLResponse {
-                print(response.statusCode)
-            }
-            guard let self = self else { return }
-            guard let data = data else { return }
-            guard let items = try? JSONDecoder().decode(Repositories.self, from: data) else { return }
-            self.repository = items.items
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+        APIClient().fetchRepository(searchWord: searchWord) { result in
+            switch result {
+            case .success(let items):
+                self.repositories = items
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    switch error {
+                    case .wrong:
+                        let alert = self.wrongError()
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    case .network:
+                        let alert = self.networkError()
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    case .parse:
+                        let alert = self.parseError()
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    }
+                }
             }
         }
-        task?.resume()
+        return
     }
 }
 
+// MARK: - Table View
 extension RepositoryListView {
-    
-    // MARK: - Method
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        repository.count
+        repositories.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let searchRepository = repository[indexPath.row]
+        let searchRepository = repositories[indexPath.row]
         cell.textLabel?.text = searchRepository.fullName
         cell.detailTextLabel?.text = searchRepository.language
         cell.tag = indexPath.row
