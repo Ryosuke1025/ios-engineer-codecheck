@@ -46,7 +46,7 @@ extension RepositoryListView {
         APIClient().taskCancel()
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    internal func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard !(searchBar.text?.isEmpty ?? true) else { return }
         searchBar.resignFirstResponder()
         

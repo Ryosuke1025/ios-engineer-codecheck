@@ -8,7 +8,7 @@
 
 import Foundation
 
-class APIClient {
+final class APIClient {
     private var task: URLSessionTask?
     
     enum FetchRepositoryError: Error {
