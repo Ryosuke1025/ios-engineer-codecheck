@@ -1,17 +1,17 @@
 import Foundation
 
-struct Repositories: Codable {
-    let items: [Repository]
+struct RepositoriesModel: Codable {
+    let items: [RepositoryModel]
     
     private enum CodingKeys: String, CodingKey {
         case items
     }
 }
 
-struct Repository: Codable {
+struct RepositoryModel: Codable, Identifiable {
     let id: Int
     let fullName: String
-    let language: String
+    let language: String?
     let stargazersCount: Int
     let watchersCount: Int
     let forksCount: Int
@@ -26,7 +26,7 @@ struct Repository: Codable {
         case watchersCount = "watchers_count"
         case forksCount = "forks_count"
         case openIssuesCount = "open_issues_count"
-        case owner = "owner"
+        case owner
     }
 }
 

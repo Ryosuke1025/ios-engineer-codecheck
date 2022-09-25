@@ -34,7 +34,11 @@ final class RepositoryDetailView: UIViewController {
     private func setpuData() {
         guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
         let repository = repositoryList.repositories[index]
-        language.text = "Written in \(repository.language)"
+        if let safeLanguage = repository.language {
+            language.text = "Written in \(safeLanguage)"
+        } else {
+            language.text = " "
+        }
         stargazers.text = "\(repository.stargazersCount) stars"
         wachers.text = "\(repository.watchersCount) watchers"
         forks.text = "\(repository.forksCount) forks"

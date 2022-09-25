@@ -9,7 +9,6 @@
 import Foundation
 
 class APIClient {
-    
     private var task: URLSessionTask?
     
     enum FetchRepositoryError: Error {
@@ -18,7 +17,7 @@ class APIClient {
             case parse
     }
     
-    func fetchRepository(searchWord: String, completionHandler: @escaping (Result<[Repository], FetchRepositoryError>) -> Void) {
+    func fetchRepository(searchWord: String, completionHandler: @escaping (Result<[RepositoryModel], FetchRepositoryError>) -> Void) {
         if !searchWord.isEmpty {
             guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else {
                 completionHandler(.failure(FetchRepositoryError.wrong))
@@ -32,11 +31,10 @@ class APIClient {
                     completionHandler(.failure(FetchRepositoryError.network))
                     return
                 }
-                
                 // Successful access
                 guard let data = data else { return }
                 do {
-                    let decodedData = try JSONDecoder().decode(Repositories.self, from: data)
+                    let decodedData = try JSONDecoder().decode(RepositoriesModel.self, from: data)
                     completionHandler(.success(decodedData.items))
                 } catch {
                     completionHandler(.failure(FetchRepositoryError.parse))
