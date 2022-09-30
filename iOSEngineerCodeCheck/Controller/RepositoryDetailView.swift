@@ -19,8 +19,16 @@ final class RepositoryDetailView: UIViewController {
     @IBOutlet private weak var wachers: UILabel!
     @IBOutlet private weak var forks: UILabel!
     @IBOutlet private weak var issues: UILabel!
-    var repositoryList: RepositoryListView?
-
+    var repository: RepositoryModel
+    
+    init?(coder: NSCoder, repository: RepositoryModel) {
+        self.repository = repository
+        super.init(coder: coder)
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     deinit {
         print("RepositoryDetailView deinit")
     }
@@ -32,8 +40,6 @@ final class RepositoryDetailView: UIViewController {
     }
     
     private func setpuData() {
-        guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
-        let repository = repositoryList.repositories[index]
         if let safeLanguage = repository.language {
             language.text = "Written in \(safeLanguage)"
         } else {
@@ -46,9 +52,6 @@ final class RepositoryDetailView: UIViewController {
     }
     
     private func getImage() {
-        guard let repositoryList = repositoryList, let index = repositoryList.index else { return }
-        let repository = repositoryList.repositories[index]
-        
         repositoryName.text = repository.fullName
         
         let owner = repository.owner

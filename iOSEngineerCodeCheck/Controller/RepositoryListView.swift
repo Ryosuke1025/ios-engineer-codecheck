@@ -20,13 +20,6 @@ final class RepositoryListView: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         searchBarSetupData()
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail"{
-            let detail = segue.destination as? RepositoryDetailView
-            detail?.repositoryList = self
-        }
-    }
 }
 
 // MARK: - Search Bar
@@ -97,8 +90,12 @@ extension RepositoryListView {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        index = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
+        let storyboard = UIStoryboard(name: String(describing: RepositoryDetailView.self), bundle: nil)
+        let nextVC = storyboard.instantiateInitialViewController { coder in
+            RepositoryDetailView(coder: coder, repository: self.repositories[indexPath.row])
+        }
+        guard let safenextVC = nextVC else { return }
+        self.navigationController?.pushViewController(safenextVC, animated: true)
     }
 }
 
