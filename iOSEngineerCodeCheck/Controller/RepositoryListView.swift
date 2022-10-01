@@ -15,7 +15,10 @@ final class RepositoryListView: UITableViewController, UISearchBarDelegate {
     @IBOutlet private weak var searchbar: UISearchBar?
     var repositories: [RepositoryModel] = []
     var index: Int?
-
+    
+    deinit {
+        print("RepositoryListView deinit")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBarSetupData()
@@ -55,22 +58,21 @@ extension RepositoryListView {
                 DispatchQueue.main.async {
                     switch error {
                     case .wrong:
-                        let alert = self.wrongError()
+                        let alert = ErrorAlert().wrongError()
                         self.present(alert, animated: true, completion: nil)
                         return
                     case .network:
-                        let alert = self.networkError()
+                        let alert = ErrorAlert().networkError()
                         self.present(alert, animated: true, completion: nil)
                         return
                     case .parse:
-                        let alert = self.parseError()
+                        let alert = ErrorAlert().parseError()
                         self.present(alert, animated: true, completion: nil)
                         return
                     }
                 }
             }
         }
-        return
     }
 }
 
@@ -96,27 +98,5 @@ extension RepositoryListView {
         }
         guard let safenextVC = nextVC else { return }
         self.navigationController?.pushViewController(safenextVC, animated: true)
-    }
-}
-
-// MARK: - Alert
-extension RepositoryListView {
-    private func showAlert(title: String, message: String = "") -> UIAlertController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
-        alert.addAction(defaultAction)
-        return alert
-    }
-    
-    private func wrongError() -> UIAlertController {
-        showAlert(title: "不正なワードの入力", message: "検索ワードの確認を行ってください")
-    }
-    
-    private func networkError() -> UIAlertController {
-        showAlert(title: "インターネットの非接続", message: "接続状況の確認を行ってください")
-    }
-    
-    private func parseError() -> UIAlertController {
-        showAlert(title: "データの解析に失敗しました")
     }
 }

@@ -26,9 +26,11 @@ final class RepositoryDetailView: UIViewController {
         super.init(coder: coder)
     }
     
+    @available(*, unavailable)
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     deinit {
         print("RepositoryDetailView deinit")
     }
@@ -36,42 +38,44 @@ final class RepositoryDetailView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setpuData()
-        getImage()
     }
     
     private func setpuData() {
         if let safeLanguage = repository.language {
             language.text = "Written in \(safeLanguage)"
         } else {
-            language.text = " "
+            language.text = "Written in ---"
         }
         stargazers.text = "\(repository.stargazersCount) stars"
         wachers.text = "\(repository.watchersCount) watchers"
         forks.text = "\(repository.forksCount) forks"
         issues.text = "\(repository.openIssuesCount) open issues"
-    }
-    
-    private func getImage() {
         repositoryName.text = repository.fullName
         
-        let owner = repository.owner
-        let avatarURLstring = owner.avatarUrl
-        guard let avatarURL = URL(string: avatarURLstring) else { return }
-        URLSession.shared.dataTask(with: avatarURL) { [weak self] (data, response, error) in
-            // Failed access
-            if let error = error {
-                print("APIアクセス時にエラーが発生しました。: error={\(error)}")
-                return
+        APIClient().fetchImage(avatarURLstring: repository.owner.avatarUrl) { result in
+            switch result {
+            case .success(let img):
+                DispatchQueue.main.async {
+                    self.imageView.image = img
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    switch error {
+                    case .wrong:
+                        let alert = ErrorAlert().wrongError()
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    case .network:
+                        let alert = ErrorAlert().networkError()
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    case .parse:
+                        let alert = ErrorAlert().parseError()
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    }
+                }
             }
-            // Successful access
-            if let response = response as? HTTPURLResponse {
-                print(response.statusCode)
-            }
-            guard let self = self else { return }
-            guard let data = data, let img = UIImage(data: data) else { return }
-            DispatchQueue.main.async {
-                self.imageView.image = img
-            }
-        }.resume()
+        }
     }
 }

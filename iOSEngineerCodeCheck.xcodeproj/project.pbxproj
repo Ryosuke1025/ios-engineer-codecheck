@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A610254A28E30D4400454B33 /* RepositoryDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A610254928E30D4400454B33 /* RepositoryDetailView.storyboard */; };
+		A616ACE928E882A100C73C19 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A616ACE828E882A100C73C19 /* ErrorAlert.swift */; };
 		A69FFA6928DDF61100231F39 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FFA6828DDF61100231F39 /* ResponseModel.swift */; };
 		A69FFA6B28DF1CE100231F39 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FFA6A28DF1CE100231F39 /* APIClient.swift */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */; };
@@ -43,6 +44,7 @@
 		A610254928E30D4400454B33 /* RepositoryDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RepositoryDetailView.storyboard; sourceTree = "<group>"; };
 		A616ACE628E6D7D400C73C19 /* iOSEngineerCodeCheckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSEngineerCodeCheckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A616ACE728E6D7D400C73C19 /* iOSEngineerCodeCheckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSEngineerCodeCheckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A616ACE828E882A100C73C19 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		A69FFA6828DDF61100231F39 /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 		A69FFA6A28DF1CE100231F39 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				BFD945E2244DC5E80012785A /* RepositoryListView.swift */,
 				BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */,
 				A69FFA6A28DF1CE100231F39 /* APIClient.swift */,
+				A616ACE828E882A100C73C19 /* ErrorAlert.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				A69FFA6928DDF61100231F39 /* ResponseModel.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
+				A616ACE928E882A100C73C19 /* ErrorAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
