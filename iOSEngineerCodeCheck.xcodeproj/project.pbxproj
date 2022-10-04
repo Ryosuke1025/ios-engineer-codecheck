@@ -13,7 +13,6 @@
 		A69FFA6B28DF1CE100231F39 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FFA6A28DF1CE100231F39 /* APIClient.swift */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
-		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
 		BFD945E3244DC5E80012785A /* RepositoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E2244DC5E80012785A /* RepositoryListView.swift */; };
 		BFD945E6244DC5E80012785A /* RepositoryListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD945E4244DC5E80012785A /* RepositoryListView.storyboard */; };
 		BFD945E8244DC5EB0012785A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD945E7244DC5EB0012785A /* Assets.xcassets */; };
@@ -49,7 +48,6 @@
 		A69FFA6A28DF1CE100231F39 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailView.swift; sourceTree = "<group>"; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BFD945E0244DC5E80012785A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BFD945E2244DC5E80012785A /* RepositoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListView.swift; sourceTree = "<group>"; };
 		BFD945E5244DC5E80012785A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RepositoryListView.storyboard; sourceTree = "<group>"; };
 		BFD945E7244DC5EB0012785A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 				A69FFA7028E0924700231F39 /* Model */,
 				A69FFA7328E0939500231F39 /* View */,
 				A69FFA7428E093F300231F39 /* Controller */,
-				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
 			);
@@ -383,7 +380,6 @@
 				BF0A658D244F2A3B00280FA6 /* RepositoryDetailView.swift in Sources */,
 				A69FFA6928DDF61100231F39 /* ResponseModel.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
-				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 				A616ACE928E882A100C73C19 /* ErrorAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
