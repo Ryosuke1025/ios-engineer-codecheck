@@ -89,6 +89,7 @@
 		A69FFA7028E0924700231F39 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A69FFA6A28DF1CE100231F39 /* APIClient.swift */,
 				A69FFA6828DDF61100231F39 /* ResponseModel.swift */,
 			);
 			path = Model;
@@ -110,7 +111,6 @@
 			children = (
 				BFD945E2244DC5E80012785A /* RepositoryListView.swift */,
 				BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */,
-				A69FFA6A28DF1CE100231F39 /* APIClient.swift */,
 				A616ACE828E882A100C73C19 /* ErrorAlert.swift */,
 			);
 			path = Controller;

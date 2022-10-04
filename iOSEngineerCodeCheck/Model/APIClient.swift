@@ -9,14 +9,20 @@
 import UIKit
 import Foundation
 
-final class APIClient {
-    private var task: URLSessionTask?
-    
-    enum FetchError: Error {
-            case wrong
-            case network
-            case parse
-    }
+protocol APIClientModel {
+    var task: URLSessionTask? { get }
+    func fetchRepository(searchWord: String, completionHandler: @escaping (Result<[RepositoryModel], FetchError>) -> Void)
+    func fetchImage(avatarURLstring: String, completionHandler: @escaping (Result<UIImage, FetchError>) -> Void)
+}
+
+enum FetchError: Error {
+        case wrong
+        case network
+        case parse
+}
+
+final class APIClient: APIClientModel {
+    var task: URLSessionTask?
     
     func fetchRepository(searchWord: String, completionHandler: @escaping (Result<[RepositoryModel], FetchError>) -> Void) {
         if !searchWord.isEmpty {

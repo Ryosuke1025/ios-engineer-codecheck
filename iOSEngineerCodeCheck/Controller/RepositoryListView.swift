@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class RepositoryListView: UITableViewController, UISearchBarDelegate {
+final class RepositoryListView: UITableViewController {
     
     // MARK: - Properties
     
@@ -26,7 +26,7 @@ final class RepositoryListView: UITableViewController, UISearchBarDelegate {
 }
 
 // MARK: - Search Bar
-extension RepositoryListView {
+extension RepositoryListView: UISearchBarDelegate {
     func searchBarSetupData() {
         guard let searchbar = searchbar else { return }
         searchbar.text = "GitHubのリポジトリを検索できるよー"
