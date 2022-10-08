@@ -8,13 +8,21 @@
 
 import UIKit
 
-final class RepositoryListView: UITableViewController {
+final class RepositoryListView: UIViewController {
     
     // MARK: - Properties
     
     @IBOutlet private weak var searchbar: UISearchBar?
     var repositories: [RepositoryModel] = []
     var index: Int?
+    
+    @IBOutlet private var tableView: UITableView! {
+        didSet {
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
     
     deinit {
         print("RepositoryListView deinit")
@@ -77,12 +85,12 @@ extension RepositoryListView: UISearchBarDelegate {
 }
 
 // MARK: - Table View
-extension RepositoryListView {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension RepositoryListView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         repositories.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let searchRepository = repositories[indexPath.row]
         cell.textLabel?.text = searchRepository.fullName
@@ -90,8 +98,10 @@ extension RepositoryListView {
         cell.tag = indexPath.row
         return cell
     }
+}
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension RepositoryListView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: String(describing: RepositoryDetailView.self), bundle: nil)
         let nextVC = storyboard.instantiateInitialViewController { coder in
             RepositoryDetailView(coder: coder, repository: self.repositories[indexPath.row])

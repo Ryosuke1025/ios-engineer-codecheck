@@ -54,6 +54,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="ktq-eC-ZBq"/>
                     <connections>
                         <outlet property="searchbar" destination="6rq-CD-Hob" id="3gq-mK-4M3"/>
+                        <outlet property="tableView" destination="Fpt-Ev-QNW" id="mwh-A1-PVB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xer-fe-JeW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
