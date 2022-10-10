@@ -13,8 +13,12 @@ final class RepositoryListView: UIViewController {
     // MARK: - Properties
     
     @IBOutlet private weak var searchbar: UISearchBar?
-    var repositories: [RepositoryModel] = []
-    var index: Int?
+    // passiveviewなのでinputのみ
+    private var presenter: RepositoryListPresenterInput!
+    
+    func inject(presenter: RepositoryListPresenterInput) {
+        self.presenter = presenter
+    }
     
     @IBOutlet private var tableView: UITableView! {
         didSet {
@@ -27,13 +31,16 @@ final class RepositoryListView: UIViewController {
     deinit {
         print("RepositoryListView deinit")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let model = APIClient()
+        let presenter = RepositoryListPresenter(view: self, model: model)
+        self.inject(presenter: presenter)
         searchBarSetupData()
     }
 }
 
-// MARK: - Search Bar
 extension RepositoryListView: UISearchBarDelegate {
     func searchBarSetupData() {
         guard let searchbar = searchbar else { return }
@@ -50,49 +57,20 @@ extension RepositoryListView: UISearchBarDelegate {
         APIClient().taskCancel()
     }
     
-    internal func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard !(searchBar.text?.isEmpty ?? true) else { return }
-        searchBar.resignFirstResponder()
-        
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchWord = searchBar.text else { return }
-        APIClient().fetchRepository(searchWord: searchWord) { result in
-            switch result {
-            case .success(let items):
-                self.repositories = items
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    switch error {
-                    case .wrong:
-                        let alert = ErrorAlert().wrongError()
-                        self.present(alert, animated: true, completion: nil)
-                        return
-                    case .network:
-                        let alert = ErrorAlert().networkError()
-                        self.present(alert, animated: true, completion: nil)
-                        return
-                    case .parse:
-                        let alert = ErrorAlert().parseError()
-                        self.present(alert, animated: true, completion: nil)
-                        return
-                    }
-                }
-            }
-        }
+        presenter.search(searchWord: searchWord)
     }
 }
 
-// MARK: - Table View
 extension RepositoryListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        repositories.count
+        presenter.repositories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let searchRepository = repositories[indexPath.row]
+        let searchRepository = presenter.repositories[indexPath.row]
         cell.textLabel?.text = searchRepository.fullName
         cell.detailTextLabel?.text = searchRepository.language
         cell.tag = indexPath.row
@@ -103,10 +81,35 @@ extension RepositoryListView: UITableViewDataSource {
 extension RepositoryListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: String(describing: RepositoryDetailView.self), bundle: nil)
-        let nextVC = storyboard.instantiateInitialViewController { coder in
-            RepositoryDetailView(coder: coder, repository: self.repositories[indexPath.row])
+        let nextVC = storyboard.instantiateInitialViewController { [self] coder in
+            RepositoryDetailView(coder: coder, repository: presenter.repositories[indexPath.row])
         }
         guard let safenextVC = nextVC else { return }
         self.navigationController?.pushViewController(safenextVC, animated: true)
+    }
+}
+
+extension RepositoryListView: RepositoryListPresenterOutput {
+    func updateTableView(repositories: [RepositoryModel]) {
+        tableView.reloadData()
+    }
+    
+    func getError(err: String) {
+        switch err {
+        case "wrong":
+            let alert = ErrorAlert().wrongError()
+            self.present(alert, animated: true, completion: nil)
+            
+        case "network":
+            let alert = ErrorAlert().networkError()
+            self.present(alert, animated: true, completion: nil)
+            
+        case "parse":
+            let alert = ErrorAlert().parseError()
+            self.present(alert, animated: true, completion: nil)
+        
+        default:
+            break
+        }
     }
 }

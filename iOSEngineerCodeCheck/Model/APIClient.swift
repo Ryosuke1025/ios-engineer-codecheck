@@ -11,7 +11,7 @@ import Foundation
 
 protocol APIClientModel {
     var task: URLSessionTask? { get }
-    func fetchRepository(searchWord: String, completionHandler: @escaping (Result<[RepositoryModel], FetchError>) -> Void)
+    func fetchRepositories(searchWord: String, completionHandler: @escaping (Result<[RepositoryModel], FetchError>) -> Void)
     func fetchImage(avatarURLstring: String, completionHandler: @escaping (Result<UIImage, FetchError>) -> Void)
 }
 
@@ -24,7 +24,7 @@ enum FetchError: Error {
 final class APIClient: APIClientModel {
     var task: URLSessionTask?
     
-    func fetchRepository(searchWord: String, completionHandler: @escaping (Result<[RepositoryModel], FetchError>) -> Void) {
+    func fetchRepositories(searchWord: String, completionHandler: @escaping (Result<[RepositoryModel], FetchError>) -> Void) {
         if !searchWord.isEmpty {
             guard let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else {
                 completionHandler(.failure(FetchError.wrong))
@@ -63,7 +63,7 @@ final class APIClient: APIClientModel {
                 completionHandler(.failure(FetchError.network))
                 return
             }
-            // Successful access
+            
             guard let safedata = data else { return }
             guard let img = UIImage(data: safedata) else {
                 completionHandler(.failure(FetchError.parse))
