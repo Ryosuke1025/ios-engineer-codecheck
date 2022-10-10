@@ -17,7 +17,7 @@ protocol RepositoryDetailPresenterInput {
 protocol RepositoryDetailPresenterOutput {
     func setupImage(image: UIImage)
     func setupTextData(repository: RepositoryModel)
-    /*func getError(err: String)*/
+    func getError(err: String)
 }
 
 final class RepositoryDetailPresenter: RepositoryDetailPresenterInput {

@@ -11,6 +11,7 @@
 		A616ACE928E882A100C73C19 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A616ACE828E882A100C73C19 /* ErrorAlert.swift */; };
 		A66A29D528F465F100647FB9 /* RepositoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A29D428F465F100647FB9 /* RepositoryListPresenter.swift */; };
 		A66A29DA28F4822800647FB9 /* RepositoryDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A29D928F4822800647FB9 /* RepositoryDetailPresenter.swift */; };
+		A66A29E328F49FD500647FB9 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A29E228F49FD500647FB9 /* Mock.swift */; };
 		A69FFA6928DDF61100231F39 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FFA6828DDF61100231F39 /* ResponseModel.swift */; };
 		A69FFA6B28DF1CE100231F39 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69FFA6A28DF1CE100231F39 /* APIClient.swift */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */; };
@@ -48,6 +49,7 @@
 		A66A29D728F4781F00647FB9 /* iOSEngineerCodeCheckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = iOSEngineerCodeCheckTests.xctest; path = "/Users/suzakiryousuke/Documents/ios-engineer-codecheck/build/Debug-iphoneos/iOSEngineerCodeCheckTests.xctest"; sourceTree = "<absolute>"; };
 		A66A29D828F4781F00647FB9 /* iOSEngineerCodeCheckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = iOSEngineerCodeCheckUITests.xctest; path = "/Users/suzakiryousuke/Documents/ios-engineer-codecheck/build/Debug-iphoneos/iOSEngineerCodeCheckUITests.xctest"; sourceTree = "<absolute>"; };
 		A66A29D928F4822800647FB9 /* RepositoryDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailPresenter.swift; sourceTree = "<group>"; };
+		A66A29E228F49FD500647FB9 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		A69FFA6828DDF61100231F39 /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
 		A69FFA6A28DF1CE100231F39 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		A66A29E128F49C1F00647FB9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A616ACE828E882A100C73C19 /* ErrorAlert.swift */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -153,7 +156,6 @@
 				A66A29DE28F49BBC00647FB9 /* Delegate */,
 				A66A29E128F49C1F00647FB9 /* Resources */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
-				A616ACE828E882A100C73C19 /* ErrorAlert.swift */,
 			);
 			path = iOSEngineerCodeCheck;
 			sourceTree = "<group>";
@@ -161,6 +163,7 @@
 		BFD945F4244DC5EB0012785A /* iOSEngineerCodeCheckTests */ = {
 			isa = PBXGroup;
 			children = (
+				A66A29E228F49FD500647FB9 /* Mock.swift */,
 				BFD945F5244DC5EB0012785A /* iOSEngineerCodeCheckTests.swift */,
 				BFD945F7244DC5EB0012785A /* Info.plist */,
 			);
@@ -411,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD945F6244DC5EB0012785A /* iOSEngineerCodeCheckTests.swift in Sources */,
+				A66A29E328F49FD500647FB9 /* Mock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
