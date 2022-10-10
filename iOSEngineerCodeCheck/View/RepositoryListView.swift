@@ -10,6 +10,12 @@ import UIKit
 
 final class RepositoryListView: UIViewController {
     
+    @IBOutlet private weak var indicator: UIActivityIndicatorView! {
+        didSet {
+
+            indicator.color = UIColor(red: 44 / 255, green: 169 / 255, blue: 225 / 255, alpha: 1)
+        }
+    }
     @IBOutlet private weak var searchbar: UISearchBar?
     // passiveviewなのでinputのみ
     private var presenter: RepositoryListPresenterInput!
@@ -36,6 +42,7 @@ final class RepositoryListView: UIViewController {
         let presenter = RepositoryListPresenter(view: self, model: model)
         self.inject(presenter: presenter)
         searchBarSetupData()
+        indicator.isHidden = true
     }
 }
 
@@ -90,9 +97,16 @@ extension RepositoryListView: UITableViewDelegate {
 
 extension RepositoryListView: RepositoryListPresenterOutput {
     func updateTableView(repositories: [RepositoryModel]) {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
+    func upData(load: Bool) {
+        DispatchQueue.main.async {
+            self.indicator.isHidden = !load
+        }
+    }
     func getError(err: String) {
         switch err {
         case "wrong":

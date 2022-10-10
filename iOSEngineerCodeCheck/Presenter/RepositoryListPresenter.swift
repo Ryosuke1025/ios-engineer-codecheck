@@ -16,6 +16,7 @@ protocol RepositoryListPresenterInput {
 
 protocol RepositoryListPresenterOutput {
     func updateTableView(repositories: [RepositoryModel])
+    func upData(load: Bool)
     func getError(err: String)
 }
 
@@ -31,7 +32,9 @@ final class RepositoryListPresenter: RepositoryListPresenterInput {
     }
     
     func search(searchWord: String) {
+        self.view.upData(load: true)
         model.fetchRepositories(searchWord: searchWord) { [weak self] result in
+            self?.view.upData(load: false)
             switch result {
             case .success(let repositories):
                 self?.repositories = repositories

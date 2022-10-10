@@ -20,6 +20,10 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
+                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="lv3-gW-ffE">
+                            <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Repository" textLabel="V66-xN-aKy" detailTextLabel="E7E-kF-FF6" style="IBUITableViewCellStyleValue1" id="jZX-YR-etd">
                                 <rect key="frame" x="0.0" y="88.666666030883789" width="414" height="43.666667938232422"/>
@@ -53,6 +57,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="ktq-eC-ZBq"/>
                     <connections>
+                        <outlet property="indicator" destination="lv3-gW-ffE" id="iLD-5t-biU"/>
                         <outlet property="searchbar" destination="6rq-CD-Hob" id="3gq-mK-4M3"/>
                         <outlet property="tableView" destination="Fpt-Ev-QNW" id="mwh-A1-PVB"/>
                     </connections>
