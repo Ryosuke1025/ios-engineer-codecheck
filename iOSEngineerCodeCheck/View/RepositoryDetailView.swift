@@ -64,7 +64,7 @@ extension RepositoryDetailView: RepositoryDetailPresenterOutput {
         imageView.image = image
     }
     
-    /*func getError(err: String) {
+    func getError(err: String) {
         switch err {
         case "wrong":
             let alert = ErrorAlert().wrongError()
@@ -81,5 +81,5 @@ extension RepositoryDetailView: RepositoryDetailPresenterOutput {
         default:
             break
         }
-    }*/
+    }
 }

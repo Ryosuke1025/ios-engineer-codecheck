@@ -88,6 +88,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A66A29DE28F49BBC00647FB9 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		A66A29E128F49C1F00647FB9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		A69FFA7028E0924700231F39 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,7 +121,6 @@
 				BFD945E2244DC5E80012785A /* RepositoryListView.swift */,
 				A610254928E30D4400454B33 /* RepositoryDetailView.storyboard */,
 				BF0A658C244F2A3B00280FA6 /* RepositoryDetailView.swift */,
-				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -135,9 +150,10 @@
 				A69FFA7028E0924700231F39 /* Model */,
 				A69FFA7328E0939500231F39 /* View */,
 				A69FFA7428E093F300231F39 /* Presenter */,
-				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
-				A616ACE828E882A100C73C19 /* ErrorAlert.swift */,
+				A66A29DE28F49BBC00647FB9 /* Delegate */,
+				A66A29E128F49C1F00647FB9 /* Resources */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
+				A616ACE828E882A100C73C19 /* ErrorAlert.swift */,
 			);
 			path = iOSEngineerCodeCheck;
 			sourceTree = "<group>";

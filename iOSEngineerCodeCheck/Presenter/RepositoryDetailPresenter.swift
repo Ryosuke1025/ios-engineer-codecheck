@@ -45,13 +45,13 @@ final class RepositoryDetailPresenter: RepositoryDetailPresenterInput {
                 DispatchQueue.main.async {
                     switch error {
                     case .wrong:
-                        /*self.view.getError(err: "wrong")*/
+                        self.view.getError(err: "wrong")
                         return
                     case .network:
-                        /*self.view.getError(err: "network")*/
+                        self.view.getError(err: "network")
                         return
                     case .parse:
-                        /*self.view.getError(err: "parse")*/
+                        self.view.getError(err: "parse")
                         return
                     }
                 }
