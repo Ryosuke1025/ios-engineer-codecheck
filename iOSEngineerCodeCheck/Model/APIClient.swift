@@ -12,6 +12,7 @@ import Foundation
 protocol APIClientModel {
     var task: URLSessionTask? { get }
     func fetchRepositories(searchWord: String, completionHandler: @escaping (Result<[RepositoryModel], FetchError>) -> Void)
+    func taskCancel()
     func fetchImage(avatarURLstring: String, completionHandler: @escaping (Result<UIImage, FetchError>) -> Void)
 }
 
@@ -65,11 +66,11 @@ final class APIClient: APIClientModel {
             }
             
             guard let safedata = data else { return }
-            guard let img = UIImage(data: safedata) else {
+            guard let image = UIImage(data: safedata) else {
                 completionHandler(.failure(FetchError.parse))
                 return
             }
-            completionHandler(.success(img))
+            completionHandler(.success(image))
         }.resume()
     }
 }

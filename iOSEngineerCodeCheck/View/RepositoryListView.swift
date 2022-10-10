@@ -10,13 +10,11 @@ import UIKit
 
 final class RepositoryListView: UIViewController {
     
-    // MARK: - Properties
-    
     @IBOutlet private weak var searchbar: UISearchBar?
     // passiveviewなのでinputのみ
     private var presenter: RepositoryListPresenterInput!
     
-    func inject(presenter: RepositoryListPresenterInput) {
+    private func inject(presenter: RepositoryListPresenterInput) {
         self.presenter = presenter
     }
     
@@ -42,7 +40,7 @@ final class RepositoryListView: UIViewController {
 }
 
 extension RepositoryListView: UISearchBarDelegate {
-    func searchBarSetupData() {
+    private func searchBarSetupData() {
         guard let searchbar = searchbar else { return }
         searchbar.text = "GitHubのリポジトリを検索できるよー"
         searchbar.delegate = self
@@ -54,11 +52,12 @@ extension RepositoryListView: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        APIClient().taskCancel()
+        presenter.searchBarBecameEmpty()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchWord = searchBar.text else { return }
+        guard !(searchBar.text?.isEmpty ?? true), let searchWord = searchBar.text else { return }
+        searchBar.resignFirstResponder()
         presenter.search(searchWord: searchWord)
     }
 }

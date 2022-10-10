@@ -10,8 +10,6 @@ import UIKit
 
 final class RepositoryDetailView: UIViewController {
     
-    // MARK: - Properties
-    
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var repositoryName: UILabel!
     @IBOutlet private weak var language: UILabel!
@@ -20,6 +18,7 @@ final class RepositoryDetailView: UIViewController {
     @IBOutlet private weak var forks: UILabel!
     @IBOutlet private weak var issues: UILabel!
     var repository: RepositoryModel
+    private var presenter: RepositoryDetailPresenterInput!
     
     init?(coder: NSCoder, repository: RepositoryModel) {
         self.repository = repository
@@ -31,16 +30,24 @@ final class RepositoryDetailView: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func inject(presenter: RepositoryDetailPresenterInput) {
+        self.presenter = presenter
+    }
     deinit {
         print("RepositoryDetailView deinit")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setpuData()
+        let model = APIClient()
+        let presenter = RepositoryDetailPresenter(repository: repository, view: self, model: model)
+        self.inject(presenter: presenter)
+        presenter.fetchData(repository: repository)
     }
-    
-    private func setpuData() {
+}
+
+extension RepositoryDetailView: RepositoryDetailPresenterOutput {
+    func setupTextData(repository: RepositoryModel) {
         if let safeLanguage = repository.language {
             language.text = "Written in \(safeLanguage)"
         } else {
@@ -51,31 +58,28 @@ final class RepositoryDetailView: UIViewController {
         forks.text = "\(repository.forksCount) forks"
         issues.text = "\(repository.openIssuesCount) open issues"
         repositoryName.text = repository.fullName
-        
-        APIClient().fetchImage(avatarURLstring: repository.owner.avatarUrl) { result in
-            switch result {
-            case .success(let img):
-                DispatchQueue.main.async {
-                    self.imageView.image = img
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    switch error {
-                    case .wrong:
-                        let alert = ErrorAlert().wrongError()
-                        self.present(alert, animated: true, completion: nil)
-                        return
-                    case .network:
-                        let alert = ErrorAlert().networkError()
-                        self.present(alert, animated: true, completion: nil)
-                        return
-                    case .parse:
-                        let alert = ErrorAlert().parseError()
-                        self.present(alert, animated: true, completion: nil)
-                        return
-                    }
-                }
-            }
-        }
     }
+        
+    func setupImage(image: UIImage) {
+        imageView.image = image
+    }
+    
+    /*func getError(err: String) {
+        switch err {
+        case "wrong":
+            let alert = ErrorAlert().wrongError()
+            self.present(alert, animated: true, completion: nil)
+            
+        case "network":
+            let alert = ErrorAlert().networkError()
+            self.present(alert, animated: true, completion: nil)
+            
+        case "parse":
+            let alert = ErrorAlert().parseError()
+            self.present(alert, animated: true, completion: nil)
+        
+        default:
+            break
+        }
+    }*/
 }

@@ -42,18 +42,12 @@ final class RepositoryListPresenter: RepositoryListPresenterInput {
                 DispatchQueue.main.async {
                     switch error {
                     case .wrong:
-                        /*let alert = ErrorAlert().wrongError()
-                        self.present(alert, animated: true, completion: nil)*/
                         self?.view.getError(err: "wrong")
                         return
                     case .network:
-                        /*let alert = ErrorAlert().networkError()
-                        self.present(alert, animated: true, completion: nil)*/
                         self?.view.getError(err: "network")
                         return
                     case .parse:
-                        /*let alert = ErrorAlert().parseError()
-                        self.present(alert, animated: true, completion: nil)*/
                         self?.view.getError(err: "parse")
                         return
                     }
@@ -63,6 +57,7 @@ final class RepositoryListPresenter: RepositoryListPresenterInput {
     }
     
     func searchBarBecameEmpty() {
+        model.taskCancel()
         repositories.removeAll()
         view.updateTableView(repositories: repositories)
     }
