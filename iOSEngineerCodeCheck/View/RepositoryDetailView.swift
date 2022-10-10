@@ -17,7 +17,15 @@ final class RepositoryDetailView: UIViewController {
     @IBOutlet private weak var wachers: UILabel!
     @IBOutlet private weak var forks: UILabel!
     @IBOutlet private weak var issues: UILabel!
+    
+    @IBOutlet private weak var button: UIButton!
+    @IBAction private func openURLTapped(_ sender: Any) {
+        guard let url = URL(string: presenter.repository.repositoryURL) else { return }
+            UIApplication.shared.open(url)
+    }
+    
     var repository: RepositoryModel
+    
     private var presenter: RepositoryDetailPresenterInput!
     
     init?(coder: NSCoder, repository: RepositoryModel) {
@@ -58,6 +66,7 @@ extension RepositoryDetailView: RepositoryDetailPresenterOutput {
         forks.text = "\(repository.forksCount) forks"
         issues.text = "\(repository.openIssuesCount) open issues"
         repositoryName.text = repository.fullName
+        button.setTitle(repository.repositoryURL, for: .normal)
     }
         
     func setupImage(image: UIImage) {

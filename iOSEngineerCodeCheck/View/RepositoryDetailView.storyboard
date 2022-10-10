@@ -21,7 +21,7 @@
                                 <rect key="frame" x="40" y="72" width="334" height="569.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewL-DO-urc">
-                                <rect key="frame" x="184" y="671.5" width="46.5" height="30"/>
+                                <rect key="frame" x="184" y="653" width="46.5" height="30"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -61,18 +61,29 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="203-qW-vJA">
+                                <rect key="frame" x="173.5" y="693" width="67" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="openURLTapped:" destination="ehq-Xk-Gsi" eventType="touchUpInside" id="isk-96-DTo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bTL-Jd-xhq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="YcB-si-y8b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vqB-Ao-IEr" secondAttribute="trailing" constant="8" symbolic="YES" id="3z7-Yf-sGJ"/>
                             <constraint firstItem="ayJ-UC-O3F" firstAttribute="centerX" secondItem="sQM-Lf-2Fx" secondAttribute="centerX" id="9F4-fe-d9J"/>
+                            <constraint firstItem="203-qW-vJA" firstAttribute="centerX" secondItem="sQM-Lf-2Fx" secondAttribute="centerX" id="ESs-NI-glF"/>
                             <constraint firstItem="bTL-Jd-xhq" firstAttribute="bottom" secondItem="YcB-si-y8b" secondAttribute="bottom" constant="30" id="GQO-tL-2Pw"/>
-                            <constraint firstItem="ewL-DO-urc" firstAttribute="top" secondItem="ayJ-UC-O3F" secondAttribute="bottom" constant="30" id="Hwl-g9-Zc7"/>
                             <constraint firstItem="bTL-Jd-xhq" firstAttribute="bottom" secondItem="vqB-Ao-IEr" secondAttribute="bottom" constant="100" id="MIE-AQ-dXf"/>
                             <constraint firstItem="bTL-Jd-xhq" firstAttribute="trailing" secondItem="YcB-si-y8b" secondAttribute="trailing" constant="20" id="NEP-pq-GPS"/>
                             <constraint firstItem="bTL-Jd-xhq" firstAttribute="trailing" secondItem="ayJ-UC-O3F" secondAttribute="trailing" constant="40" id="Rcg-Rc-lG5"/>
+                            <constraint firstItem="203-qW-vJA" firstAttribute="top" secondItem="ewL-DO-urc" secondAttribute="bottom" constant="10" id="SIo-Cz-LSV"/>
                             <constraint firstItem="ewL-DO-urc" firstAttribute="centerX" secondItem="sQM-Lf-2Fx" secondAttribute="centerX" id="Tng-RH-1Vw"/>
+                            <constraint firstItem="bTL-Jd-xhq" firstAttribute="bottom" secondItem="203-qW-vJA" secondAttribute="bottom" constant="138" id="Xyd-gy-GHE"/>
+                            <constraint firstItem="ewL-DO-urc" firstAttribute="top" secondItem="ayJ-UC-O3F" secondAttribute="bottom" constant="11.5" id="YLW-am-SKJ"/>
                             <constraint firstItem="ayJ-UC-O3F" firstAttribute="top" secondItem="bTL-Jd-xhq" secondAttribute="top" constant="28" id="cpp-Aw-nWZ"/>
                             <constraint firstItem="YcB-si-y8b" firstAttribute="top" secondItem="ayJ-UC-O3F" secondAttribute="bottom" constant="100" id="dIU-ci-wFG"/>
                             <constraint firstItem="ayJ-UC-O3F" firstAttribute="leading" secondItem="bTL-Jd-xhq" secondAttribute="leading" constant="40" id="lah-8y-MdD"/>
@@ -82,6 +93,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="gYt-4L-xwX"/>
                     <connections>
+                        <outlet property="button" destination="203-qW-vJA" id="2mj-6K-lMu"/>
                         <outlet property="forks" destination="vZU-sw-LT2" id="Rte-od-Mpr"/>
                         <outlet property="imageView" destination="ayJ-UC-O3F" id="NLv-MC-1A1"/>
                         <outlet property="issues" destination="mrD-OL-A5m" id="9ZD-al-NA2"/>
@@ -93,7 +105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MTl-IV-dGo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="215.94202898550725" y="125.54347826086958"/>
+            <point key="canvasLocation" x="215.94202898550725" y="125.22321428571428"/>
         </scene>
     </scenes>
     <resources>

@@ -16,6 +16,7 @@ struct RepositoryModel: Codable, Identifiable {
     let watchersCount: Int
     let forksCount: Int
     let openIssuesCount: Int
+    let repositoryURL: String
     let owner: Owner
     
     private enum CodingKeys: String, CodingKey {
@@ -26,6 +27,7 @@ struct RepositoryModel: Codable, Identifiable {
         case watchersCount = "watchers_count"
         case forksCount = "forks_count"
         case openIssuesCount = "open_issues_count"
+        case repositoryURL = "html_url"
         case owner
     }
 }
