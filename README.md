@@ -23,6 +23,7 @@ MVPを採用<br>
 ## 新規機能を追加
 ・インジケータの追加<br>
 ・Webページに飛べるリンクをボタンとして追加<br>
+・API通信におけるエラーアラートの追加
 
 # 使ったツール
 ・[SwiftLint](https://github.com/realm/SwiftLint)
